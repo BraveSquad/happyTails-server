@@ -1,0 +1,35 @@
+{
+  "name": "happytrails-server",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "npm i && node server.js"
+  },
+  "keywords": [],
+  "author": "Danny Castro",
+  "license": "ISC",
+  "dependencies": {
+    "@auth0/auth0-react": "^1.11.0",
+    "auth0": "^2.44.0",
+    "cors": "^2.8.5",
+    "dotenv": "^16.0.3",
+    "express": "^4.18.2",
+    "jest": "^29.2.2",
+    "jsonwebtoken": "^8.5.1",
+    "jwks-rsa": "^2.1.4",
+    "mongoose": "^6.7.0"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.20"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/BraveSquad/happyTails-server.git"
+  },
+  "bugs": {
+    "url": "https://github.com/BraveSquad/happyTails-server/issues"
+  },
+  "homepage": "https://github.com/BraveSquad/happyTails-server#readme",
+  "description": ""
+}
