@@ -4,6 +4,7 @@ const { Schema } = mongoose;
 
 const animalSchema = new Schema({
   species: String,
+  photos: Array,
   breed: String,
   size: String,
   color: String,

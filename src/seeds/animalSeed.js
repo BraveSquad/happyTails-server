@@ -9,6 +9,7 @@ const animals = require('../models/animal');
 const seed = async () => {
   await animals.create({
     species: 'Dog',
+    photos: [],
     breed: 'Pitbull',
     size: 'medium',
     color: 'black/white',
