@@ -3,14 +3,14 @@
   "name": "happytails-server",
   "builds": [
     {
-      "src": "script.js",
+      "src": "server.js",
       "use": "@vercel/node"
     }
   ],
   "routes": [
     {
       "src": "/(.*)",
-      "dest": "/index.js"
+      "dest": "/server.js"
     }
   ]
 }
