@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+
 //------------- ERROR HANDLING -------------//
 
 const notFoundHandler = require('./src/handlers/error404');
@@ -25,12 +26,23 @@ const errorHandler = require('./src/handlers/error500');
 //------------ MONG-DB -------------//
 
 const mongoose = require('mongoose');
+const { getReviews, deleteReview, updatedReview, handleGetUser } = require('./src/modules/reviews');
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
 db.once('open', function () {
   console.log('Mongoose is connected');
 });
+
+//------------ CRUD -------------//
+
+// Review CRUD
+// app.get('/review', getReviews);
+// app.delete('/review/:id', deleteReview);
+// app.put('/review/:id', updatedReview);
+// app.get('/user', handleGetUser);
+
+
 
 app.get('/', (request, response) => {
   response.send('WERE MY ANIMALS AT YO!?!?');

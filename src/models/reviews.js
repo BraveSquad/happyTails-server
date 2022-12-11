@@ -10,6 +10,6 @@ const reviewSchema = new Schema({
   stars: Number
 });
 
-const REVIEW = mongoose.model('reviews', reviewSchema);
+const ReviewModel = mongoose.model('reviews', reviewSchema);
 
-module.exports = REVIEW;
+module.exports = ReviewModel;
