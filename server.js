@@ -5,6 +5,10 @@ require('dotenv').config();
 const express = require('express');
 const cors = require('cors');
 
+//------------------CRUD-------------------//
+
+const { handlePostUser, handlePostFav } = require('./src/modules/userHandler')
+
 // -----------APP USING EXPRESS & JSON -------------//
 const PORT = process.env.PORT || 3002;
 const app = express();
@@ -25,6 +29,7 @@ const errorHandler = require('./src/handlers/error500');
 //------------ MONG-DB -------------//
 
 const mongoose = require('mongoose');
+mongoose.set('strictQuery', true);
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -39,7 +44,8 @@ app.get('/', (request, response) => {
 // app.use(verifyUser);
 
 app.get('*', notFoundHandler);
-
+app.post('/user', handlePostUser);
+app.post('/user', handlePostFav);
 // Error stuff
 app.use(errorHandler);
 
@@ -47,3 +53,5 @@ app.use(errorHandler);
 
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
+
+// export default app;
