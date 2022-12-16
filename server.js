@@ -43,6 +43,7 @@ db.once('open', function () {
 
 // Review CRUD
 // app.get('/review', getReviews);
+app.post('/review', getReviews);
 // app.delete('/review/:id', deleteReview);
 // app.put('/review/:id', updatedReview);
 // app.get('/user', handleGetUser);
@@ -75,4 +76,3 @@ app.listen(PORT, () => console.log(`listening on ${PORT}`));
 
 
 module.exports = app;
-
