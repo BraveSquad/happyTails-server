@@ -8,7 +8,7 @@ const cors = require('cors');
 //------------------CRUD-------------------//
 
 const { handlePostUser, handlePostFav, handleGetUser } = require('./src/modules/userHandler')
-const { getReviews, deleteReview, updatedReview, } = require('./src/modules/reviews');
+const { getAllReviews, deleteReview, updatedReview, createReviews } = require('./src/modules/reviews');
 
 // -----------APP USING EXPRESS & JSON -------------//
 const PORT = process.env.PORT || 3002;
@@ -39,22 +39,19 @@ db.once('open', function () {
   console.log('Mongoose is connected');
 });
 
-//------------ CRUD -------------//
+//------------  REVIEW CRUD  -------------//
+
+app.use(verifyUser);
 
 // Review CRUD
-// app.get('/review', getReviews);
-app.post('/review', getReviews);
-// app.delete('/review/:id', deleteReview);
+app.get('/allReviews', getAllReviews);
+app.post('/review', createReviews);
+app.delete('/review/:id', deleteReview);
 // app.put('/review/:id', updatedReview);
 // app.get('/user', handleGetUser);
 
 
-
-
-
-app.use(verifyUser);
-
-
+//------------  USER CRUD  -------------//
 app.get('/newUser', handleGetUser)
 app.post('/user', handlePostUser);
 app.put('/fav/:id', handlePostFav);
