@@ -1,32 +1,8 @@
 'use strict';
 
-//--------- Vonage API -------------//
-import express from 'express';
-
-const {
-  json,
-  urlencoded
-} = express
-
-// const express = require('express');
-
-app.use(json())
-app.use(urlencoded({
-  extended: true
-}))
-
-app.listen(3000, () => {
-  console.log('Server listening at http://localhost:3000')
-})
-
-app.post('/webhooks/inbound', (req, res) => {
-  console.log(req.body);
-
-  res.status(200).end();
-});
 //--------- DOTENV Config -------------//
 require('dotenv').config();
-// const express = require('express'); declared above
+const express = require('express');
 const cors = require('cors');
 
 //------------------CRUD-------------------//
@@ -35,7 +11,7 @@ const { handlePostUser, handlePostFav } = require('./src/modules/userHandler')
 
 // -----------APP USING EXPRESS & JSON -------------//
 const PORT = process.env.PORT || 3002;
-// const app = express(); // is declared above
+const app = express();
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -94,6 +70,29 @@ app.use(errorHandler);
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
 
+//--------- Vonage API -------------//
+
+const {
+  json,
+  urlencoded
+} = express
+
+// const express = require('express');
+
+app.use(json())
+app.use(urlencoded({
+  extended: true
+}))
+
+app.listen(3000, () => {
+  console.log('Server listening at http://localhost:3000')
+})
+
+app.post('/webhooks/inbound', (req, res) => {
+  console.log(req.body);
+
+  res.status(200).end();
+});
 
 
 
