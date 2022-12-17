@@ -1,14 +1,14 @@
 'use strict';
 
 //--------- Vonage API -------------//
-import express from 'express'
+import express from 'express';
 
 const {
   json,
   urlencoded
 } = express
 
-const app = express();
+// const express = require('express');
 
 app.use(json())
 app.use(urlencoded({
@@ -26,7 +26,7 @@ app.post('/webhooks/inbound', (req, res) => {
 });
 //--------- DOTENV Config -------------//
 require('dotenv').config();
-const express = require('express');
+// const express = require('express'); declared above
 const cors = require('cors');
 
 //------------------CRUD-------------------//
@@ -35,7 +35,7 @@ const { handlePostUser, handlePostFav } = require('./src/modules/userHandler')
 
 // -----------APP USING EXPRESS & JSON -------------//
 const PORT = process.env.PORT || 3002;
-// const app = express(); is declared above
+// const app = express(); // is declared above
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
