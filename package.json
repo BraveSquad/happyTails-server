@@ -11,6 +11,8 @@
   "license": "ISC",
   "dependencies": {
     "@auth0/auth0-react": "^1.11.0",
+    "@vonage/server-sdk": "^2.10.7-beta-2",
+    "@vonage/sms": "^1.0.9",
     "auth0": "^2.44.0",
     "cors": "^2.8.5",
     "dotenv": "^16.0.3",
@@ -19,7 +21,6 @@
     "jsonwebtoken": "^8.5.1",
     "jwks-rsa": "^2.1.4",
     "mongoose": "^6.7.0",
-    "@vonage/server-sdk": "2.10.7-beta-2",
     "request": "^2.88.0"
   },
   "type": "module",
@@ -35,5 +36,4 @@
   },
   "homepage": "https://github.com/BraveSquad/happyTails-server#readme",
   "description": ""
-  
 }

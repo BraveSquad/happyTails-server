@@ -1,3 +1,4 @@
+//An example server.js file for vonage
 import dotenv from 'dotenv'
 import express from 'express'
 import request from 'request'
