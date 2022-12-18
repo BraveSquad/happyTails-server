@@ -1,5 +1,4 @@
 'use strict';
-
 // eslint-disable-next-line no-unused-vars
 module.exports = function (err, req, res, next) {
   // Sometimes, errors come in as an object, others as a string
