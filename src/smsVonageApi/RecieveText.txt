@@ -1,0 +1,95 @@
+**** npm i in terminal
+
+****In server looking file
+
+-----------
+import express from 'express'    
+
+const {  
+ json,     
+ urlencoded  
+} = express  
+
+const app = express()    
+
+app.use(json())  
+
+app.use(urlencoded({     
+ extended: true  
+}))  
+
+app.listen(3000, () => {     
+ console.log('Server listening at http://localhost:3000')    
+})
+
+
+app.post('/webhooks/inbound', (req, res) => {
+  console.log(req.body);
+
+  res.status(200).end();
+});
+
+--------------
+THENNNNNNNNNN
+
+node server.js in terminal
+
+------------
+THEN use ngrok for local host to be presented privately
+
+brew install ngrok/ngrok/ngrok
+GO here to this website if it dont work https://ngrok.com/download
+
+
+ngrok http 3000
+
+------------
+THENNNNNNNNN YOU GET BACK Something LIKE this
+
+{
+  to: '447401234567',
+  from: '447312277109',
+  channel: 'sms',
+  message_uuid: 'ecb3f7ab-5f70-4de1-9003-1e59a7270782',
+  timestamp: '2022-08-08T23:00:32Z',
+  usage: { price: '0.0057', currency: 'EUR' },
+  message_type: 'text',
+  text: 'Chuck Norris can hear text messages.',
+  sms: { num_messages: '1' }
+}
+
+------------
+FOR SENDING MESSAGES DOO
+
+import Vonage from '@vonage/server-sdk'
+import SMS from '@vonage/server-sdk/lib/Messages/SMS.js'
+
+const vonage = new Vonage({
+  apiKey: VONAGE_API_KEY,
+  apiSecret: VONAGE_API_SECRET
+})
+
+
+const text = "👋Hello from Vonage";
+
+vonage.messages.send(
+  new SMS(text, TO_NUMBER, "Vonage"),
+  (err, data) => {
+    if (err) {
+      console.error("Message failed with error:", err);
+    } else {
+      console.log(`Message ${data.message_uuid} sent successfully.`);
+    }
+  }
+);
+
+------------
+THENNNNNNNNNN
+
+node index.js
+
+------------
+THENNNNNNNNN YOU GET BACK Something LIKE this
+
+
+Message d00000sejdrfsdirfhseirofhsergothue4 sent sucessfully.
