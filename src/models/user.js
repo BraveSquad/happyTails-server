@@ -6,7 +6,8 @@ const userSchema = new Schema({
   userName: String,
   picture: String,
   email: String,
-  favorite: Array
+  favorite: Array,
+  isLoading: Boolean
 });
 
 const USER = mongoose.model('users', userSchema);

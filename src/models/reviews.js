@@ -4,9 +4,8 @@ const { Schema } = mongoose;
 
 const reviewSchema = new Schema({
   userName: String,
-  image: String,
   email: String,
-  message: String,
+  review: String,
   stars: Number
 });
 

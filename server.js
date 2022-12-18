@@ -10,6 +10,8 @@ const cors = require('cors');
 const { handlePostUser, handlePostFav, handleGetUser } = require('./src/modules/userHandler')
 const { getAllReviews, deleteReview, updatedReview, createReviews } = require('./src/modules/reviews');
 
+const { handlePostCalendar, handleGetUserAppt } = require('./src/modules/calendarHandler')
+
 // -----------APP USING EXPRESS & JSON -------------//
 const PORT = process.env.PORT || 3002;
 const app = express();
@@ -47,7 +49,8 @@ app.use(verifyUser);
 app.get('/allReviews', getAllReviews);
 app.post('/review', createReviews);
 app.delete('/review/:id', deleteReview);
-// app.put('/review/:id', updatedReview);
+
+app.put('/review/:id', updatedReview);
 // app.get('/user', handleGetUser);
 
 
@@ -56,6 +59,12 @@ app.get('/newUser', handleGetUser)
 app.post('/user', handlePostUser);
 app.put('/fav/:id', handlePostFav);
 // Error stuff
+
+
+app.post('/appt', handlePostCalendar);
+app.get('/calendar', handleGetUserAppt)
+
+
 
 app.get('/', (request, response) => {
   response.send('WERE MY ANIMALS AT YO!?!?');
