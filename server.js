@@ -7,7 +7,8 @@ const cors = require('cors');
 
 //------------------CRUD-------------------//
 
-const { handlePostUser, handlePostFav } = require('./src/modules/userHandler')
+const { handlePostUser, handlePostFav, handleGetUser } = require('./src/modules/userHandler')
+const { getAllReviews, deleteReview, updatedReview, createReviews } = require('./src/modules/reviews');
 
 // -----------APP USING EXPRESS & JSON -------------//
 const PORT = process.env.PORT || 3002;
@@ -25,16 +26,12 @@ const errorHandler = require('./src/handlers/error500');
 
 //----------- VERIFICATION-AUTH0 --------------//
 
-// const verifyUser = require('./src/Auth/auth');
+const verifyUser = require('./src/Auth/auth');
 
 //------------ MONG-DB -------------//
 
 const mongoose = require('mongoose');
-
 mongoose.set('strictQuery', true);
-
-const { getReviews, deleteReview, updatedReview, handleGetUser } = require('./src/modules/reviews');
-
 mongoose.connect(process.env.DATABASE_URL);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'connection error:'));
@@ -42,30 +39,37 @@ db.once('open', function () {
   console.log('Mongoose is connected');
 });
 
-//------------ CRUD -------------//
+//------------  REVIEW CRUD  -------------//
+
+app.use(verifyUser);
 
 // Review CRUD
-// app.get('/review', getReviews);
-app.post('/review', getReviews);
-// app.delete('/review/:id', deleteReview);
+app.get('/allReviews', getAllReviews);
+app.post('/review', createReviews);
+app.delete('/review/:id', deleteReview);
 // app.put('/review/:id', updatedReview);
 // app.get('/user', handleGetUser);
 
 
+//------------  USER CRUD  -------------//
+app.get('/newUser', handleGetUser)
+app.post('/user', handlePostUser);
+app.put('/fav/:id', handlePostFav);
+// Error stuff
 
 app.get('/', (request, response) => {
   response.send('WERE MY ANIMALS AT YO!?!?');
 });
 
-// app.use(verifyUser);
-
 app.get('*', notFoundHandler);
-app.post('/user', handlePostUser);
-app.post('/user', handlePostFav);
-// Error stuff
 app.use(errorHandler);
 
 
 
 
 app.listen(PORT, () => console.log(`listening on ${PORT}`));
+
+
+
+
+module.exports = app;
