@@ -4,7 +4,7 @@ const ReviewModel = require('../models/reviews');
 async function getAllReviews(req, res, next) {
   console.log('GET ALL REVIEWS', req.body);
   try {
-    const reviews = await ReviewModel.find({ email: req.user.email });
+    const reviews = await ReviewModel.find();
     res.status(200).send(reviews);
   } catch (error) {
     console.error(error);
@@ -47,17 +47,19 @@ const deleteReview = async (request, response, next) => {
   }
 };
 
-let updatedReview = async (request, response, next) => {
-  try {
-    const updatedReview = await ReviewModel.findByIdAndUpdate(request.params.id, request.body, { new: true });
-    response.status(200).send(updatedReview);
+async function updatedReview(req, res) {
+  console.log('UPDATE:: req-BODY', req.body)
 
-  } catch (error) {
-    error.customMessage = 'Something went wrong with updating your Review!';
-    console.error(error.customMessage + error);
-    next(error);
+  console.log('UPDATE :: req-PARAMS', req.params)
+
+  try {
+    const updatedReview = await ReviewModel.findOneAndUpdate({ _id: req.params.id, email: req.body.email }, req.body)
+    console.log('user Found!', updatedReview);
+
+  } catch (e) {
+    res.status(500).send('server error');
   }
-};
+}
 
 let handleGetReview = async (request, response) => {
   console.log('Getting the user');
