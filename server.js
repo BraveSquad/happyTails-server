@@ -43,6 +43,10 @@ db.once('open', function () {
 
 //------------  REVIEW CRUD  -------------//
 
+app.get('/', (request, response) => {
+  response.send('WERE MY ANIMALS AT YO!?!?');
+});
+
 app.use(verifyUser);
 
 // Review CRUD
@@ -66,9 +70,6 @@ app.get('/calendar', handleGetUserAppt)
 
 
 
-app.get('/', (request, response) => {
-  response.send('WERE MY ANIMALS AT YO!?!?');
-});
 
 app.get('*', notFoundHandler);
 app.use(errorHandler);
