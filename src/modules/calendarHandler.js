@@ -32,5 +32,21 @@ async function handlePostCalendar(req, res) {
     res.status(500).send('server error');
   }
 }
+//
 
-module.exports = { handlePostCalendar, handleGetUserAppt };
+async function deleteAppt(req, res) {
+  console.log('DELETED::', req.params)
+  const { id } = req.params;
+  try {
+    const todo = await CALENDAR.findOne({ _id: id });
+    if (!todo) res.status(400).send('unable to delete todo');
+    else {
+      await CALENDAR.findByIdAndDelete(id);
+      res.status(204).send('todo deleted');
+    }
+  } catch (e) {
+    res.status(500).send('server error');
+  }
+}
+
+module.exports = { handlePostCalendar, handleGetUserAppt, deleteAppt };
