@@ -10,7 +10,7 @@ const cors = require('cors');
 const { handlePostUser, handlePostFav, handleGetUser } = require('./src/modules/userHandler')
 const { getAllReviews, deleteReview, updatedReview, createReviews } = require('./src/modules/reviews');
 
-const { handlePostCalendar, handleGetUserAppt } = require('./src/modules/calendarHandler')
+const { handlePostCalendar, handleGetUserAppt, deleteAppt } = require('./src/modules/calendarHandler')
 
 // -----------APP USING EXPRESS & JSON -------------//
 const PORT = process.env.PORT || 3002;
@@ -42,6 +42,9 @@ db.once('open', function () {
 });
 
 //------------  REVIEW CRUD  -------------//
+app.get('/', (request, response) => {
+  response.send('WERE MY ANIMALS AT YO!?!?');
+});
 
 app.use(verifyUser);
 
@@ -62,6 +65,7 @@ app.put('/fav/:id', handlePostFav);
 
 
 app.post('/appt', handlePostCalendar);
+app.delete('/appt/:id', deleteAppt);
 app.get('/calendar', handleGetUserAppt)
 
 
